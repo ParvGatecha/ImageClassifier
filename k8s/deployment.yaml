@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-classifier
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: image-classifier
+  template:
+    metadata:
+      labels:
+        app: image-classifier
+    spec:
+      imagePullSecrets:
+      - name: docker-hub-secret
+      containers:
+      - name: image-classifier
+        image: parvg/image-classifier-api:latest
+        ports:
+        - containerPort: 80
